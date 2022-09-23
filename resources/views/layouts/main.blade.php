@@ -8,14 +8,18 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Aldrich" media="all">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://kit.fontawesome.com/1bf067c1d8.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div style="font-family: Aldrich">
             {{ $slot }}
         </div>
+
+        <!-- Sweetalert 2 -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </html>
