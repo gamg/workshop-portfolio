@@ -20,9 +20,7 @@
                         </div>
                     </div>
                     <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8 text-lg">
-                        <a href="#" class="font-medium text-gray-200 hover:text-red-300">Link 1</a>
-                        <a href="#" class="font-medium text-gray-200 hover:text-red-300">Link 1</a>
-                        <a href="#" class="font-medium text-gray-200 hover:text-red-300">Link 1</a>
+                        <x-navigation.links class="text-gray-200 hover:text-red-300" :items="$items"/>
                     </div>
                     <!-- Aqui botones edit y add -->
                 </nav>
@@ -44,9 +42,7 @@
                         </div>
                     </div>
                     <div class="px-2 pt-2 pb-3 space-y-1">
-                        <a href="#" class="font-medium block px-3 py-2 rounded-md text-base text-gray-700 hover:text-gray-900 hover:bg-gray-50" >Link 1</a>
-                        <a href="#" class="font-medium block px-3 py-2 rounded-md text-base text-gray-700 hover:text-gray-900 hover:bg-gray-50" >Link 2</a>
-                        <a href="#" class="font-medium block px-3 py-2 rounded-md text-base text-gray-700 hover:text-gray-900 hover:bg-gray-50" >Link 3</a>
+                        <x-navigation.links class="block px-3 py-2 rounded-md text-base text-gray-700 hover:text-gray-900 hover:bg-gray-50" :items="$items"/>
                         <!-- Aqui botones edit y add -->
                     </div>
                 </div>
