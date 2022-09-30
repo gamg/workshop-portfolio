@@ -11,6 +11,11 @@ class Navigation extends Component
     public $openSlideover = false;
     public $addNewItem = false;
 
+    protected $rules = [
+        'items.*.label' => 'required|max:20',
+        'items.*.link'  => 'required|max:40',
+    ];
+
     public function mount()
     {
         $this->items = Navitem::all();
@@ -20,6 +25,18 @@ class Navigation extends Component
     {
         $this->addNewItem = $addNewItem;
         $this->openSlideover = true;
+    }
+
+    public function edit()
+    {
+        $this->validate();
+
+        foreach ($this->items as $item) {
+            $item->save();
+        }
+
+        $this->reset('openSlideover');
+        // notify
     }
 
     public function render()
