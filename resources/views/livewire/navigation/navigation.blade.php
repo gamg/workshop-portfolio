@@ -66,7 +66,7 @@
             @if($addNewItem)
                 Formulario para agregar...
             @else
-                Formulario para editar...
+                <x-forms.edit-items :items="$items"/>
             @endif
         </x-modals.slideover>
     </section>
