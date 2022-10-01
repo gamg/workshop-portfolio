@@ -72,5 +72,10 @@
     "Yes, delete it!": "Sí, eliminalo",
     "Cancel": "Cancelar",
     "Delete": "Eliminar",
-    "Menu item has been deleted.": "El elemento del menú ha sido eliminado"
+    "Menu item has been deleted.": "El elemento del menú ha sido eliminado",
+    "Item created successfully!": "Elemento creado exitosamente!",
+    "These are the static links for the 3 sections of portfolio (Home, Projects and Contact):": "Estos son los enlaces estáticos para las 3 secciones del portafolio (Inicio, Proyectos y Contacto):",
+    "hello": "hola",
+    "projects": "proyectos",
+    "contact": "contacto"
 }
