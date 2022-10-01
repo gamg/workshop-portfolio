@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Navigation;
 
 use App\Models\Navitem;
 use Livewire\Component;
+use App\Http\Livewire\Traits\Notification;
 
 class Navigation extends Component
 {
+    use Notification;
+
     public $items;
     public $openSlideover = false;
     public $addNewItem = false;
@@ -38,14 +41,14 @@ class Navigation extends Component
         }
 
         $this->reset('openSlideover');
-        $this->dispatchBrowserEvent('notify', ['message' => __('Menu items updated successfully!')]);
+        $this->notify(__('Menu items updated successfully!'));
     }
 
     public function deleteItem(Navitem $item)
     {
         $item->delete();
         $this->mount();
-        $this->dispatchBrowserEvent('deleteMessage', ['message' => __('Menu item has been deleted.')]);
+        $this->notify(__('Menu item has been deleted.'), 'deleteMessage');
     }
 
     public function render()
