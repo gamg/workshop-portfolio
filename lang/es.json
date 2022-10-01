@@ -65,6 +65,11 @@
     "Label": "Etiqueta",
     "Link": "Enlace",
     "There are no items to show!": "No existen elmentos para mostrar!",
-    "Update": "Actualizar"
-
+    "Update": "Actualizar",
+    "Are you sure?": "¿Estas segur@?",
+    "You will not be able to revert this!": "Tu no puedes revertir esta acción",
+    "Yes, delete it!": "Sí, eliminalo",
+    "Cancel": "Cancelar",
+    "Delete": "Eliminar",
+    "Menu item has been deleted.": "El elemento del menú ha sido eliminado"
 }
