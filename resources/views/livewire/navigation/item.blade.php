@@ -1,3 +1,1 @@
-<div>
-    crear item...
-</div>
+<x-forms.new-item/>

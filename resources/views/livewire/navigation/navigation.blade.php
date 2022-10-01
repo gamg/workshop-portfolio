@@ -1,4 +1,4 @@
-<section id="hola">
+<section id="{{ __('hello') }}">
     <div x-data="{ open: false, focus: true }" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
         <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
             <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">

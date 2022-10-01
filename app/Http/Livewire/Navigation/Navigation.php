@@ -14,7 +14,7 @@ class Navigation extends Component
     public $openSlideover = false;
     public $addNewItem = false;
 
-    protected $listeners = ['deleteItem'];
+    protected $listeners = ['deleteItem', 'itemAdded' => 'updateDataAfterAddItem'];
 
     protected $rules = [
         'items.*.label' => 'required|max:20',
@@ -30,6 +30,12 @@ class Navigation extends Component
     {
         $this->addNewItem = $addNewItem;
         $this->openSlideover = true;
+    }
+
+    public function updateDataAfterAddItem()
+    {
+        $this->mount();
+        $this->reset('openSlideover');
     }
 
     public function edit()
