@@ -21,9 +21,7 @@
                             <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Panel</h2>
                         </div>
                         <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                            <div class="w-full sm:max-w-md px-6 py-4">
-                                {{ $slot }}
-                            </div>
+                            {{ $slot }}
                         </div>
                     </div>
                 </div>

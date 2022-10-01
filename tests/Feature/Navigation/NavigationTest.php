@@ -69,4 +69,15 @@ class NavigationTest extends TestCase
         $this->assertDatabaseHas('navitems', ['id' => $items->first()->id, 'label' => 'My Projects', 'link' => '#myprojects']);
         $this->assertDatabaseHas('navitems', ['id' => $items->last()->id, 'label' => 'Contact Me', 'link' => '#contact-me']);
     }
+
+    /** @test */
+    public function admin_can_delete_an_item()
+    {
+        $user = User::factory()->create();
+        $item = Navitem::factory()->create();
+
+        Livewire::actingAs($user)->test(Navigation::class)->call('deleteItem', $item);
+
+        $this->assertDatabaseMissing( 'navitems', ['id' => $item->id]);
+    }
 }
