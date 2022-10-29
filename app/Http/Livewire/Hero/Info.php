@@ -9,6 +9,7 @@ class Info extends Component
 {
     public PersonalInformation $info;
     public $cvFile = null;
+    public $imageFile = null;
 
     public function mount()
     {
