@@ -4,15 +4,14 @@ namespace App\Http\Livewire\Navigation;
 
 use App\Models\Navitem;
 use Livewire\Component;
+use App\Http\Livewire\Traits\Slideover;
 use App\Http\Livewire\Traits\Notification;
 
 class Navigation extends Component
 {
-    use Notification;
+    use Notification, Slideover;
 
     public $items;
-    public $openSlideover = false;
-    public $addNewItem = false;
 
     protected $listeners = ['deleteItem', 'itemAdded' => 'updateDataAfterAddItem'];
 
@@ -24,12 +23,6 @@ class Navigation extends Component
     public function mount()
     {
         $this->items = Navitem::all();
-    }
-
-    public function openSlide($addNewItem = false)
-    {
-        $this->addNewItem = $addNewItem;
-        $this->openSlideover = true;
     }
 
     public function updateDataAfterAddItem()
