@@ -1,7 +1,9 @@
 <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:max-w-none">
     <div class="flex items-center">
-        <h2 class="text-2xl font-extrabold text-gray-900 mr-5" id="proyectos">{{ __('Projects') }}</h2>
-        <!-- Boton add -->
+        <h2 class="text-2xl font-extrabold text-gray-900 mr-5" id="{{ __('proyectos') }}">{{ __('Projects') }}</h2>
+        <x-actions.action title="{{ __('New Project') }}" class="text-gray-800 hover:text-gray-600">
+            <x-icons.add/>
+        </x-actions.action>
     </div>
     <div class="space-y-12 lg:space-y-6 lg:grid lg:grid-cols-3 lg:gap-x-6">
         @forelse($projects as $project)
@@ -14,7 +16,12 @@
                 <h3 class="mt-6 text-base font-semibold text-gray-900">
                     <a href="#" wire:click.prevent="loadProject({{ $project->id }})">{{ $project->name }}</a>
                 </h3>
-                <!-- Boton edit and delete -->
+                <div class="flex items-center" x-data>
+                    <x-actions.action title="{{ __('Edit') }}" class="text-gray-800 hover:text-gray-600">
+                        <x-icons.edit/>
+                    </x-actions.action>
+                    <x-actions.delete eventName="deleteProject" :object="$project"/>
+                </div>
             </div>
         @empty
             <h3>{{ __('There are no projects to show!') }}</h3>

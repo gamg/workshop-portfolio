@@ -3,6 +3,7 @@
 namespace Tests\Feature\Project;
 
 use App\Http\Livewire\Project\Project;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Project as ProjectModel;
@@ -49,5 +50,32 @@ class ProjectTest extends TestCase
             ->assertSee($project->video_code)
             ->assertSee($project->url)
             ->assertSee($project->repo_url);
+    }
+
+    /** @test */
+    public function only_admin_can_see_projects_actions()
+    {
+        $user = User::factory()->create();
+        ProjectModel::factory(3)->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+                ->assertStatus(200)
+                ->assertSee(__('New Project'))
+                ->assertSee(__('Edit'))
+                ->assertSee(__('Delete'));
+    }
+
+    /** @test */
+    public function guests_cannot_see_projects_actions()
+    {
+        $this->markTestSkipped('uncomment later');
+
+        /*Livewire::test(Project::class)
+            ->assertStatus(200)
+            ->assertDontSee(__('Edit'))
+            ->assertDontSee(__('New Project'))
+            ->assertDontSee(__('Delete'));
+
+        $this->assertGuest();*/
     }
 }
