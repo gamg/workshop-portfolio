@@ -30,4 +30,24 @@ class ProjectTest extends TestCase
                 ->assertSee($projects->last()->name)
                 ->assertSee($projects->last()->image);
     }
+
+    /** @test */
+    public function user_can_see_all_project_info()
+    {
+        $project = ProjectModel::factory()->create([
+            'image' => 'myproject.jpg',
+            'video_link' => 'https://www.youtube.com/watch?v=K4TOrB7at0Y',
+            'url' => 'https://www.cafedelprogramador.com/',
+            'repo_url' => 'https://github.com/gamg/workshop-portfolio',
+        ]);
+
+        Livewire::test(Project::class)
+            ->call('loadProject', $project->id)
+            ->assertSee($project->name)
+            ->assertSee($project->description)
+            ->assertSee($project->image)
+            ->assertSee($project->video_code)
+            ->assertSee($project->url)
+            ->assertSee($project->repo_url);
+    }
 }
