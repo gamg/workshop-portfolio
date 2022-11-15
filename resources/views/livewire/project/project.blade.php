@@ -1,7 +1,7 @@
 <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:max-w-none">
     <div class="flex items-center">
         <h2 class="text-2xl font-extrabold text-gray-900 mr-5" id="{{ __('proyectos') }}">{{ __('Projects') }}</h2>
-        <x-actions.action title="{{ __('New Project') }}" class="text-gray-800 hover:text-gray-600">
+        <x-actions.action wire:click.prevent="create" title="{{ __('New Project') }}" class="text-gray-800 hover:text-gray-600">
             <x-icons.add/>
         </x-actions.action>
     </div>
@@ -82,5 +82,7 @@
         </div>
     </div>
 
-    <!-- SlideOver -->
+    <x-modals.slideover>
+        <x-forms.create-project :currentProject="$currentProject" :imageFile="$imageFile"/>
+    </x-modals.slideover>
 </div>
