@@ -111,4 +111,37 @@ class ProjectTest extends TestCase
 
         Storage::disk('projects')->assertExists($newProject->image);
     }
+
+    /** @test */
+    public function admin_can_edit_a_project()
+    {
+        $user = User::factory()->create();
+        $project = ProjectModel::factory()->create();
+        $img = UploadedFile::fake()->image('mysuperimg.jpg');
+        Storage::fake('projects');
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->call('loadProject', $project->id)
+            ->set('currentProject.name', 'My super project updated')
+            ->set('currentProject.description', 'Software Developed with Laravel PHP and a lot of love')
+            ->set('imageFile', $img)
+            ->set('currentProject.video_link', 'https://www.youtube.com/watch?v=K4TOrB7at0Y')
+            ->set('currentProject.url', 'https://www.cafedelprogramador.com/')
+            ->set('currentProject.repo_url', 'https://github.com/gamg/workshop-portfolio')
+            ->call('save');
+
+        $project->refresh();
+
+        $this->assertDatabaseHas('projects', [
+            'id' => $project->id,
+            'name' => 'My super project updated',
+            'description' => 'Software Developed with Laravel PHP and a lot of love',
+            'image' => $project->image,
+            'video_link' => $project->video_link,
+            'url' => $project->url,
+            'repo_url' => 'https://github.com/gamg/workshop-portfolio',
+        ]);
+
+        Storage::disk('projects')->assertExists($project->image);
+    }
 }
