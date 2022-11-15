@@ -37,6 +37,10 @@ class Project extends Component
         }
 
         $this->openModal = $modal;
+
+        if (!$modal) {
+            $this->openSlide();
+        }
     }
 
     public function create()
