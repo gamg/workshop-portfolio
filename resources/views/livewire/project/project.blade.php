@@ -28,8 +28,16 @@
         @endforelse
     </div>
 
-    <!-- Boton Mostrar mas / Mostrar menos -->
+    <div class="flex justify-center mt-8 items-center space-x-2">
+        @if($counter < $this->total)
+            <button wire:click="showMore" type="button" class="px-3 py-3 border rounded bg-gray-800 text-white hover:border-red-600 hover:bg-red-400">{{ __('Show more') }}</button>
+        @endif
+        @if($counter > 3)
+            <a href="#" wire:click.prevent="showLess" class="text-sm text-gray-800 hover:text-gray-600" target="_blank">{{ __('Show less') }}</a>
+        @endif
+    </div>
 
+    <!-- Modal -->
     <div x-data="{ open: @entangle('openModal').defer }" @keydown.window.escape="open = false" x-show="open" class="relative z-10" aria-labelledby="modal-title" x-ref="dialog" aria-modal="true">
         <div x-show="open" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Background backdrop, show/hide based on modal state." class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
         <div class="fixed z-10 inset-0 overflow-y-auto">

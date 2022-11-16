@@ -89,5 +89,7 @@
     "Close": "Cerrar",
     "New Project": "Nuevo Proyecto",
     "Project saved successfully!": "Proyecto guardado exitosamente!",
-    "Project has been deleted.": "Proyecto ha sido eliminado correctamente."
+    "Project has been deleted.": "Proyecto ha sido eliminado correctamente.",
+    "Show more": "Ver más",
+    "Show less": "Ver menos"
 }
