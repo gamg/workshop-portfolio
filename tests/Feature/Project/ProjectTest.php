@@ -144,4 +144,125 @@ class ProjectTest extends TestCase
 
         Storage::disk('projects')->assertExists($project->image);
     }
+
+    /** @test */
+    public function name_is_required()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.name', '')
+            ->call('save')
+            ->assertHasErrors(['currentProject.name' => 'required']);
+    }
+
+    /** @test */
+    public function name_must_have_a_maximum_of_one_hundred_characters()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.name', 'abdcefghijklmnopqrstuabdcefghijklmnopqrstabdcefghijklmnopqrstuabdcefghijklmnopqrst1234567891234567891')
+            ->call('save')
+            ->assertHasErrors(['currentProject.name' => 'max']);
+    }
+
+    /** @test */
+    public function description_is_required()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.description', '')
+            ->call('save')
+            ->assertHasErrors(['currentProject.description' => 'required']);
+    }
+
+    /** @test */
+    public function description_must_have_a_maximum_of_four_hundred_fifty_characters()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.description', 'abdcefghabdcefghijklmnopqrstuabdcefghijklmnopqrstabdcefghijklmnopqrstuabdcefghijklmnopqrst123456789123456789abdcefghijklmnopqrstuabdcefghijklmnopqrstabdcefghijklmnopqrstuabdcefghijklmnopqrst123456789123456789abdcefghijklmnopqrstuabdcefghijklmnopqrstabdcefghijijklmnopqrstuabdcefghijklmnopqrstabdcefghijklmnopqrstuabdcefghijklmnopqrst123456789123456789abdcefghijklmnopqrstuabdcefghijklmnopqrstabdcefghijklmnopqrstuabdcefghijklmnopqrst123456789123456789abdcefghijklmnopqrstuabdcefghijklmnopqrstabdcefghij')
+            ->call('save')
+            ->assertHasErrors(['currentProject.description' => 'max']);
+    }
+
+    /** @test */
+    public function image_file_must_be_a_image()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('imageFile', UploadedFile::fake()->create('myfile.pdf'))
+            ->call('save')
+            ->assertHasErrors(['imageFile' => 'image']);
+    }
+
+    /** @test */
+    public function image_file_must_be_max_one_megabyte()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('imageFile', UploadedFile::fake()->image('myimage.jpg')->size(1025))
+            ->call('save')
+            ->assertHasErrors(['imageFile' => 'max']);
+    }
+
+    /** @test */
+    public function video_link_must_be_a_valid_url()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.video_link', 'http:/www.google.com')
+            ->call('save')
+            ->assertHasErrors(['currentProject.video_link' => 'url']);
+    }
+
+    /** @test */
+    public function video_link_must_match_with_regex()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.video_link', 'https://www.youtube.com/')
+            ->call('save')
+            ->assertHasErrors(['currentProject.video_link' => 'regex']);
+    }
+
+    /** @test */
+    public function url_must_be_a_valid_url()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.url', 'http:/www.google.com')
+            ->call('save')
+            ->assertHasErrors(['currentProject.url' => 'url']);
+    }
+
+    /** @test */
+    public function repo_url_must_be_a_valid_url()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.repo_url', 'http:/www.google.com')
+            ->call('save')
+            ->assertHasErrors(['currentProject.repo_url' => 'url']);
+    }
+
+    /** @test */
+    public function repo_url_must_match_with_regex()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Project::class)
+            ->set('currentProject.repo_url', 'https://nogithub.com/gamg/workshop-portfolio')
+            ->call('save')
+            ->assertHasErrors(['currentProject.repo_url' => 'regex']);
+    }
 }
