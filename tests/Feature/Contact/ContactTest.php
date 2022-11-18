@@ -4,6 +4,7 @@ namespace Tests\Feature\Contact;
 
 use App\Http\Livewire\Contact\Contact;
 use App\Models\PersonalInformation;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -23,5 +24,27 @@ class ContactTest extends TestCase
         $info = PersonalInformation::factory()->create();
 
         Livewire::test(Contact::class)->assertSee($info->email);
+    }
+
+    /** @test */
+    public function only_admin_can_see_contact_action()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Contact::class)
+            ->assertStatus(200)
+            ->assertSee(__('Edit'));
+    }
+
+    /** @test */
+    public function guests_cannot_see_contact_action()
+    {
+        $this->markTestSkipped('uncomment later');
+
+        /*Livewire::test(Contact::class)
+            ->assertStatus(200)
+            ->assertDontSee(__('Edit'));
+
+        $this->assertGuest();*/
     }
 }
