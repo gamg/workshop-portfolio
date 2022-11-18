@@ -15,5 +15,7 @@
         <x-icons.edit/>
     </x-actions.action>
 
-    <!-- SlideOver -->
+    <x-modals.slideover>
+        <x-forms.edit-contact-email/>
+    </x-modals.slideover>
 </div>
