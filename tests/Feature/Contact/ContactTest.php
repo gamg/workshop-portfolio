@@ -66,4 +66,26 @@ class ContactTest extends TestCase
             'email' => 'tavo@cdp.com'
         ]);
     }
+
+    /** @test */
+    public function contact_email_is_required()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Contact::class)
+            ->set('contact.email', '')
+            ->call('edit')
+            ->assertHasErrors(['contact.email' => 'required']);
+    }
+
+    /** @test */
+    public function contact_email_must_be_a_valid_email()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(Contact::class)
+            ->set('contact.email', 'tavo@cdp')
+            ->call('edit')
+            ->assertHasErrors(['contact.email' => 'email']);
+    }
 }
