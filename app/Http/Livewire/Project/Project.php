@@ -80,6 +80,6 @@ class Project extends Component
     public function render()
     {
         $projects = ProjectModel::take($this->counter)->get();
-        return view('livewire..project.project', ['projects' => $projects]);
+        return view('livewire.project.project', ['projects' => $projects]);
     }
 }
