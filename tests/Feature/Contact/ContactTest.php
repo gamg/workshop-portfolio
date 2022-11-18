@@ -5,6 +5,7 @@ namespace Tests\Feature\Contact;
 use App\Http\Livewire\Contact\Contact;
 use App\Models\PersonalInformation;
 use App\Models\User;
+use Faker\Provider\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -12,6 +13,8 @@ use Tests\TestCase;
 
 class ContactTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function contact_component_can_be_rendered()
     {
@@ -46,5 +49,21 @@ class ContactTest extends TestCase
             ->assertDontSee(__('Edit'));
 
         $this->assertGuest();*/
+    }
+
+    /** @test */
+    public function admin_can_edit_contact_email()
+    {
+        $user = User::factory()->create();
+        $contact = PersonalInformation::factory()->create();
+
+        Livewire::actingAs($user)->test(Contact::class)
+            ->set('contact.email', 'tavo@cdp.com')
+            ->call('edit');
+
+        $this->assertDatabaseHas('personal_information', [
+            'id' => $contact->id,
+            'email' => 'tavo@cdp.com'
+        ]);
     }
 }
