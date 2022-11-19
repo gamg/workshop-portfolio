@@ -1,9 +1,11 @@
 <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:max-w-none">
     <div class="flex items-center">
         <h2 class="text-2xl font-extrabold text-gray-900 mr-5" id="{{ __('proyectos') }}">{{ __('Projects') }}</h2>
-        <x-actions.action wire:click.prevent="create" title="{{ __('New Project') }}" class="text-gray-800 hover:text-gray-600">
-            <x-icons.add/>
-        </x-actions.action>
+        @auth
+            <x-actions.action wire:click.prevent="create" title="{{ __('New Project') }}" class="text-gray-800 hover:text-gray-600">
+                <x-icons.add/>
+            </x-actions.action>
+        @endauth
     </div>
     <div class="space-y-12 lg:space-y-6 lg:grid lg:grid-cols-3 lg:gap-x-6">
         @forelse($projects as $project)
@@ -16,12 +18,14 @@
                 <h3 class="mt-6 text-base font-semibold text-gray-900">
                     <a href="#" wire:click.prevent="loadProject({{ $project->id }})">{{ $project->name }}</a>
                 </h3>
-                <div class="flex items-center" x-data>
-                    <x-actions.action wire:click.prevent="loadProject({{ $project->id }}, false)" title="{{ __('Edit') }}" class="text-gray-800 hover:text-gray-600">
-                        <x-icons.edit/>
-                    </x-actions.action>
-                    <x-actions.delete eventName="deleteProject" :object="$project"/>
-                </div>
+                @auth
+                    <div class="flex items-center" x-data>
+                        <x-actions.action wire:click.prevent="loadProject({{ $project->id }}, false)" title="{{ __('Edit') }}" class="text-gray-800 hover:text-gray-600">
+                            <x-icons.edit/>
+                        </x-actions.action>
+                        <x-actions.delete eventName="deleteProject" :object="$project"/>
+                    </div>
+                @endauth
             </div>
         @empty
             <h3>{{ __('There are no projects to show!') }}</h3>
@@ -90,7 +94,9 @@
         </div>
     </div>
 
-    <x-modals.slideover>
-        <x-forms.create-project :currentProject="$currentProject" :imageFile="$imageFile"/>
-    </x-modals.slideover>
+    @auth
+        <x-modals.slideover>
+            <x-forms.create-project :currentProject="$currentProject" :imageFile="$imageFile"/>
+        </x-modals.slideover>
+    @endauth
 </div>
