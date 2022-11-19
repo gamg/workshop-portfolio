@@ -3,6 +3,7 @@
 namespace Tests\Feature\Contact;
 
 use App\Http\Livewire\Contact\SocialLink;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\SocialLink as SocialLinkModel;
@@ -29,5 +30,47 @@ class SocialLinkTest extends TestCase
             ->assertSee($links->first()->icon)
             ->assertSee($links->last()->url)
             ->assertSee($links->last()->icon);
+    }
+
+    /** @test */
+    public function only_admin_can_see_social_links_actions()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(SocialLink::class)
+            ->assertStatus(200)
+            ->assertSee(__('New'))
+            ->assertSee(__('Edit'));
+    }
+
+    /** @test */
+    public function guests_cannot_see_social_links_actions()
+    {
+        $this->markTestSkipped('uncomment later');
+
+        /*Livewire::test(SocialLink::class)
+            ->assertStatus(200)
+            ->assertDontSee(__('New'))
+            ->assertDontSee(__('Edit'));
+
+        $this->assertGuest();*/
+    }
+
+    /** @test */
+    public function admin_can_add_a_social_link()
+    {
+        $user = User::factory()->create();
+
+        Livewire::actingAs($user)->test(SocialLink::class)
+            ->set('socialLink.name', 'Youtube')
+            ->set('socialLink.url', 'https://youtube.com/profile')
+            ->set('socialLink.icon', 'fa-brands fa-youtube')
+            ->call('save');
+
+        $this->assertDatabaseHas('social_links', [
+            'name' => 'Youtube',
+            'url' => 'https://youtube.com/profile',
+            'icon' => 'fa-brands fa-youtube'
+        ]);
     }
 }

@@ -195,6 +195,7 @@ return [
         'imageFile'                => 'Archivo de Imagen',
         'video_link'               => 'Enlace de video',
         'repo_url'                 => 'Url de repositorio',
+        'icon'                     => 'Ícono',
     ],
     'custom'               => [
         'items.*.label' => [
