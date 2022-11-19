@@ -27,5 +27,6 @@
 
     <div class="mt-4 flex items-center justify-between">
         <x-primary-button>{{ __('Save') }}</x-primary-button>
+        {{ $slot }}
     </div>
 </form>
