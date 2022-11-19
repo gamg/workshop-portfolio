@@ -36,13 +36,7 @@
 
             <livewire:contact.social-link/>
 
-            <!-- livewire component  -->
-            <nav class="flex flex-wrap justify-center -mx-5 -my-2">
-                <a href="#" class="font-medium px-5 py-2 text-gray-200 hover:text-red-300">Link 1</a>
-                <a href="#" class="font-medium px-5 py-2 text-gray-200 hover:text-red-300">Link 2</a>
-                <a href="#" class="font-medium px-5 py-2 text-gray-200 hover:text-red-300">Link 3</a>
-                <!-- Boton Logout -->
-            </nav>
+            <livewire:navigation.footer-link/>
         </div>
     </section>
 </x-main-layout>

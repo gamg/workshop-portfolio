@@ -40,6 +40,7 @@ class Navigation extends Component
         }
 
         $this->reset('openSlideover');
+        $this->emitTo('navigation.footer-link', 'itemsHaveBeenUpdated');
         $this->notify(__('Menu items updated successfully!'));
     }
 
@@ -47,6 +48,7 @@ class Navigation extends Component
     {
         $item->delete();
         $this->mount();
+        $this->emitTo('navigation.footer-link', 'itemsHaveBeenUpdated');
         $this->notify(__('Menu item has been deleted.'), 'deleteMessage');
     }
 
