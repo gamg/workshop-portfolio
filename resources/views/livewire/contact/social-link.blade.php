@@ -12,14 +12,18 @@
         <x-actions.action wire:click.prevent="create" title="{{ __('New') }}" class="text-yellow-300 hover:text-blue-300">
             <x-icons.add/>
         </x-actions.action>
-        <x-actions.action title="{{ __('Edit') }}" class="text-yellow-300 hover:text-blue-300">
+        <x-actions.action wire:click.prevent="openSlide" title="{{ __('Edit') }}" class="text-yellow-300 hover:text-blue-300">
             <x-icons.edit/>
         </x-actions.action>
     </div>
 
     <x-modals.slideover>
-        <div class="w-full sm:max-w-md px-6 py-4">
-            <x-forms.create-or-edit-social-link-form/>
-        </div>
+        @if($addNewItem)
+            <div class="w-full sm:max-w-md px-6 py-4">
+                <x-forms.create-or-edit-social-link-form/>
+            </div>
+        @else
+            <x-forms.edit-social-links :socialLinks="$socialLinks" :socialLinkSelected="$socialLinkSelected"/>
+        @endif
     </x-modals.slideover>
 </div>
