@@ -14,6 +14,8 @@ class SocialLink extends Component
     public SocialLinkModel $socialLink;
     public $socialLinkSelected = '';
 
+    protected $listeners = ['deleteSocialLink'];
+
     protected $rules = [
         'socialLink.name' => 'required|max:20',
         'socialLink.url' => 'required|url',
@@ -55,6 +57,13 @@ class SocialLink extends Component
         $this->reset(['openSlideover', 'socialLinkSelected']);
 
         $this->notify(__('Social link saved successfully!'));
+    }
+
+    public function deleteSocialLink()
+    {
+        $this->socialLink->delete();
+        $this->reset('socialLinkSelected');
+        $this->notify(__('Social link has been deleted.'), 'deleteMessage');
     }
 
     public function render()

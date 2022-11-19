@@ -78,14 +78,14 @@ class SocialLinkTest extends TestCase
     public function admin_can_edit_a_social_link()
     {
         $user = User::factory()->create();
-        $socialLink = SocialLinkModel::factory()-create();
+        $socialLink = SocialLinkModel::factory()->create();
 
         Livewire::actingAs($user)->test(SocialLink::class)
             ->set('socialLinkSelected', $socialLink->id)
             ->set('socialLink.name', 'My Github XD')
             ->set('socialLink.url', 'https://github.com/gamg')
             ->set('socialLink.icon', 'fa-brands fa-github')
-            ->save('save');
+            ->call('save');
 
         $socialLink->refresh();
 
@@ -95,5 +95,18 @@ class SocialLinkTest extends TestCase
             'url' => 'https://github.com/gamg',
             'icon' => $socialLink->icon,
         ]);
+    }
+
+    /** @test */
+    public function admin_can_delete_a_social_link()
+    {
+        $user = User::factory()->create();
+        $socialLink = SocialLinkModel::factory()->create();
+
+        Livewire::actingAs($user)->test(SocialLink::class)
+            ->set('socialLinkSelected', $socialLink->id)
+            ->call('deleteSocialLink');
+
+        $this->assertDatabaseMissing('social_links', ['id' => $socialLink->id]);
     }
 }
