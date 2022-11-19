@@ -22,14 +22,16 @@
                     <x-navigation.links class="text-gray-200 hover:text-red-300" :items="$items"/>
                 </div>
 
-                <div class="hidden md:flex items-center justify-between space-x-2 ml-4 pb-1">
-                    <x-actions.action wire:click.prevent="openSlide" class="text-yellow-300 hover:text-blue-300" title="{{ __('Edit') }}">
-                        <x-icons.edit/>
-                    </x-actions.action>
-                    <x-actions.action wire:click.prevent="openSlide(true)" class="text-yellow-300 hover:text-blue-300" title="{{ __('New') }}">
-                        <x-icons.add/>
-                    </x-actions.action>
-                </div>
+                @auth
+                    <div class="hidden md:flex items-center justify-between space-x-2 ml-4 pb-1">
+                        <x-actions.action wire:click.prevent="openSlide" class="text-yellow-300 hover:text-blue-300" title="{{ __('Edit') }}">
+                            <x-icons.edit/>
+                        </x-actions.action>
+                        <x-actions.action wire:click.prevent="openSlide(true)" class="text-yellow-300 hover:text-blue-300" title="{{ __('New') }}">
+                            <x-icons.add/>
+                        </x-actions.action>
+                    </div>
+                @endauth
             </nav>
         </div>
 
@@ -61,12 +63,14 @@
         </div>
     </div>
 
-    <x-modals.slideover>
-        @if($addNewItem)
-            <livewire:navigation.item/>
-        @else
-            <x-forms.edit-items :items="$items"/>
-        @endif
-    </x-modals.slideover>
+    @auth
+        <x-modals.slideover>
+            @if($addNewItem)
+                <livewire:navigation.item/>
+            @else
+                <x-forms.edit-items :items="$items"/>
+            @endif
+        </x-modals.slideover>
+    @endauth
 </section>
 

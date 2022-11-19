@@ -106,5 +106,10 @@
     "Create": "Crear",
     "Social link saved successfully!": "Enlace social guardado exitosamente!",
     "Select a social link to edit": "Selecciona un enlace social para editar",
-    "Social link has been deleted.": "Enlace social ha sido eliminado."
+    "Social link has been deleted.": "Enlace social ha sido eliminado.",
+    "Remember me": "Recuerdame",
+    "Forgot your password?": "¿Olvidates tu contraseña?",
+    "Log in": "Iniciar sesión",
+    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "¿Olvidaste tu contraseña? No hay problema. Simplemente háganos saber su dirección de correo electrónico y le enviaremos un enlace de restablecimiento de contraseña que le permitirá elegir una nueva.",
+    "Email Password Reset Link": "Enviar enlace de reseteo"
 }
