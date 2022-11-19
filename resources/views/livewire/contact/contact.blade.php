@@ -1,4 +1,4 @@
-<div class="px-5 py-2" id="{{ __('contact-me') }}">
+<div class="px-5 py-2" id="{{ __('contact') }}">
 
     @if($contact->email)
         <a href="mailto:{{ $contact->email }}" class="flex text-base leading-6 text-gray-400 hover:text-red-400 space-y-1">
