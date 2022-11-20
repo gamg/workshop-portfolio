@@ -10,7 +10,7 @@ class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_registration_screen_can_be_rendered()
+    /*public function test_registration_screen_can_be_rendered()
     {
         $response = $this->get('/register');
 
@@ -28,5 +28,5 @@ class RegistrationTest extends TestCase
 
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
-    }
+    }*/
 }

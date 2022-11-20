@@ -7,6 +7,7 @@ use App\Models\Navitem;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Log;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -44,12 +45,12 @@ class NavigationTest extends TestCase
     /** @test */
     public function guests_cannot_see_navigation_actions()
     {
-        /*Livewire::test(Navigation::class)
+        Livewire::test(Navigation::class)
             ->assertStatus(200)
             ->assertDontSee(__('Edit'))
             ->assertDontSee(__('New'));
 
-        $this->assertGuest();*/
+        $this->assertGuest();
     }
 
     /** @test */

@@ -70,15 +70,15 @@ class ProjectTest extends TestCase
     /** @test */
     public function guests_cannot_see_projects_actions()
     {
-        $this->markTestSkipped('uncomment later');
+        //$this->markTestSkipped('uncomment later');
 
-        /*Livewire::test(Project::class)
+        Livewire::test(Project::class)
             ->assertStatus(200)
             ->assertDontSee(__('Edit'))
             ->assertDontSee(__('New Project'))
             ->assertDontSee(__('Delete'));
 
-        $this->assertGuest();*/
+        $this->assertGuest();
     }
 
     /** @test */

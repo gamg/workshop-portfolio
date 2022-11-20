@@ -52,12 +52,14 @@
                 </div>
                 <div class="px-2 pt-2 pb-3 space-y-1">
                     <x-navigation.links class="block px-3 py-2 rounded-md text-base text-gray-700 hover:text-gray-900 hover:bg-gray-50" :items="$items"/>
-                    <x-actions.action wire:click.prevent="openSlide" class="block px-2 text-yellow-500 hover:text-blue-500" title="{{ __('Edit') }}">
-                        <x-icons.edit/>
-                    </x-actions.action>
-                    <x-actions.action wire:click.prevent="openSlide(true)" class="block px-2 text-yellow-500 hover:text-blue-500" title="{{ __('New') }}">
-                        <x-icons.add/>
-                    </x-actions.action>
+                    @auth
+                        <x-actions.action wire:click.prevent="openSlide" class="block px-2 text-yellow-500 hover:text-blue-500" title="{{ __('Edit') }}">
+                            <x-icons.edit/>
+                        </x-actions.action>
+                        <x-actions.action wire:click.prevent="openSlide(true)" class="block px-2 text-yellow-500 hover:text-blue-500" title="{{ __('New') }}">
+                            <x-icons.add/>
+                        </x-actions.action>
+                    @endauth
                 </div>
             </div>
         </div>
